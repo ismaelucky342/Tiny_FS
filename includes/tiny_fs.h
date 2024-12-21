@@ -113,7 +113,7 @@ void        GrabarSuperBloque(EXT_SIMPLE_SUPERBLOCK *ext_superblock, FILE *fich)
 
 /*------------------------------------------directory.c--------------------------------------------*/
 
-void        Directorio(EXT_ENTRADA_DIR *directorio, EXT_BLQ_INODOS *inodos);
+void                    Directorio(EXT_ENTRADA_DIR *directorio);
 int                Imprimir(EXT_ENTRADA_DIR *directorio, EXT_BLQ_INODOS *inodos, EXT_DATOS *memdatos, char *nombre);
 
 /*--------------------------------------file_operations.c------------------------------------------*/

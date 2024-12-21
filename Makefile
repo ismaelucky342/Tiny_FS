@@ -19,49 +19,48 @@ COLOR_GREEN   = \033[32m
 COLOR_RED     = \033[31m
 COLOR_YELLOW  = \033[33m
 
-NAME =                        tiny_fs
+NAME = tiny_fs
 
-CC =                        gcc
+CC = gcc
 
-CFLAGS =                -Wall -Werror -Wextra #-fsanitize=thread -pthrea 
+CFLAGS = -Wall -Werror -Wextra -Iincludes
 
-SRC_FILES =                src/main.c \
-                                src/bytemaps.c \
-                                src/data_block.c \
-                                src/directory.c \
-                                src/file_operations.c \
-                                src/inode.c \
-                                src/superblock.c \
-                                src/utils/utils.c
+SRC_FILES = src/main.c \
+                        src/bytemaps.c \
+                        src/data_block.c \
+                        src/directory.c \
+                        src/file_operations.c \
+                        src/inode.c \
+                        src/superblock.c \
+                        src/utils/utils.c
 
 OBJS = $(SRC_FILES:.c=.o)
 
 all: $(NAME)
-        @echo "$(COLOR_GREEN)Compilacion finalizada.$(COLOR_RESET)"
-        @echo "                                                                                               "
-        @echo "$(COLOR_GREEN)            █████████╗██╗███╗   ██╗██╗   ██╗     ███████╗███████╗$(COLOR_RESET)"
-        @echo "$(COLOR_GREEN)            ╚══██╔══╝ ██║████╗  ██║╚██╗ ██╔╝     ██╔════╝██╔════╝$(COLOR_RESET)"
-        @echo "$(COLOR_GREEN)               ██║    ██║██╔██╗ ██║ ╚████╔╝      █████╗  ███████╗$(COLOR_RESET)"
-        @echo "$(COLOR_GREEN)               ██║    ██║██║╚██╗██║  ╚██╔╝       ██╔══╝  ╚════██║$(COLOR_RESET)"
-        @echo "$(COLOR_GREEN)               ██║    ██║██║ ╚████║   ██║███████╗██║     ███████║$(COLOR_RESET)"
-        @echo "$(COLOR_GREEN)               ╚═╝    ╚═╝╚═╝  ╚═══╝   ╚═╝╚══════╝╚═╝     ╚══════╝$(COLOR_RESET)"
-        @echo "                                                                                               "
-        @echo "$(COLOR_YELLOW)    Ismael Hernandez Clemente - ismael.hernandez@live.u-tad.com$(COLOR_RESET)"
-        @echo "$(COLOR_YELLOW)    Izhan Sastre Hernando     - izhan.sastre@live.u-tad.com$(COLOR_RESET)"
-
+	@echo "$(COLOR_GREEN)Compilacion finalizada.$(COLOR_RESET)"
+	@echo "                                                                                               "
+	@echo "$(COLOR_GREEN)            █████████╗██╗███╗   ██╗██╗   ██╗     ███████╗███████╗$(COLOR_RESET)"
+	@echo "$(COLOR_GREEN)            ╚══██╔══╝ ██║████╗  ██║╚██╗ ██╔╝     ██╔════╝██╔════╝$(COLOR_RESET)"
+	@echo "$(COLOR_GREEN)               ██║    ██║██╔██╗ ██║ ╚████╔╝      █████╗  ███████╗$(COLOR_RESET)"
+	@echo "$(COLOR_GREEN)               ██║    ██║██║╚██╗██║  ╚██╔╝       ██╔══╝  ╚════██║$(COLOR_RESET)"
+	@echo "$(COLOR_GREEN)               ██║    ██║██║ ╚████║   ██║███████╗██║     ███████║$(COLOR_RESET)"
+	@echo "$(COLOR_GREEN)               ╚═╝    ╚═╝╚═╝  ╚═══╝   ╚═╝╚══════╝╚═╝     ╚══════╝$(COLOR_RESET)"
+	@echo "                                                                                               "
+	@echo "$(COLOR_YELLOW)    Ismael Hernandez Clemente - ismael.hernandez@live.u-tad.com$(COLOR_RESET)"
+	@echo "$(COLOR_YELLOW)    Izhan Sastre Hernando     - izhan.sastre@live.u-tad.com$(COLOR_RESET)"
 
 $(NAME): $(OBJS)
-        @$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
+	@$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
 
 %.o: %.c
-        @printf "%-200s\r" ">Philo_bonus compiling: $(CC) $(CFLAGS) -c -o $@ $<"
-        @$(CC) $(CFLAGS) -c -o $@ $<
+	@printf "%-200s\r" ">Philo_bonus compiling: $(CC) $(CFLAGS) -c -o $@ $<"
+	@$(CC) $(CFLAGS) -c -o $@ $<
 
 clean:
-        @rm -f $(OBJS)
+	@rm -f $(OBJS)
 
 fclean: clean
-        @rm -f $(NAME)
+	@rm -f $(NAME)
 
 re: fclean all
 
