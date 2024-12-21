@@ -36,6 +36,7 @@ void LeeSuperBloque(EXT_SIMPLE_SUPERBLOCK *psup) {
  * @param ext_superblock Puntero a la estructura `EXT_SIMPLE_SUPERBLOCK` que contiene los datos a escribir.
  * @param fich Puntero al archivo `FILE` en el que se escribirán los datos.
  */
+
 void GrabarSuperBloque(EXT_SIMPLE_SUPERBLOCK *ext_superblock, FILE *fich) {
     if (fich == NULL) {
         perror("Error opening file");
