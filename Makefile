@@ -32,7 +32,6 @@ SRC_FILES = src/main.c \
                         src/file_operations.c \
                         src/inode.c \
                         src/superblock.c \
-                        src/utils/utils.c
 
 OBJS = $(SRC_FILES:.c=.o)
 
