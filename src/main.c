@@ -19,15 +19,15 @@
 
 /**
  * @brief Función principal que gestiona la ejecución de comandos y las operaciones en el sistema de archivos.
- * 
- * Esta función se encarga de la interacción con el usuario a través de comandos, y realiza diversas operaciones 
+ *
+ * Esta función se encarga de la interacción con el usuario a través de comandos, y realiza diversas operaciones
  * como lectura y escritura de datos en un sistema de archivos basado en particiones. Los comandos pueden ser:
  * - `dir`: Mostrar el contenido del directorio.
  * - `rename`: Cambiar el nombre de un archivo o directorio.
  * - `remove`: Eliminar un archivo o directorio.
  * - `copy`: Copiar un archivo o directorio.
  * - `salir`: Guardar los cambios y salir del sistema.
- * 
+ *
  * @return int Retorna 0 si la ejecución es exitosa, o un valor distinto si ocurre algún error.
  */
 int main()
@@ -61,14 +61,23 @@ int main()
     memcpy(memdatos, &datosfich[4], MAX_BLOQUES_DATOS * SIZE_BLOQUE);
 
     // Bucle de tratamiento de comandos
-    for (;;)
+    while (1)
     {
-        do
+
+        printf(">> ");
+        fflush(stdin);
+        if (fgets(comando, LONGITUD_COMANDO, stdin) == NULL)
         {
-            printf(">> ");
-            fflush(stdin);
-            fgets(comando, LONGITUD_COMANDO, stdin);
-        } while (ComprobarComando(comando, orden, argumento1, argumento2) != 0);
+            {
+                perror("Error reading command");
+                continue;
+            }
+        }
+        if (ComprobarComando(comando, orden, argumento1, argumento2) != 0)
+        {
+            printf(COLOR_RED "Error: Invalid command\n" COLOR_RESET);
+            continue;
+        }
 
         if (strcmp(orden, "info") == 0)
         {
@@ -95,7 +104,7 @@ int main()
             GrabarDatos(memdatos, fent);
             fclose(fent);
             printf(COLOR_GREEN "Saliendo del sistema..." COLOR_RESET "\n");
-            return 0;
+            break;
         }
         else
         {
@@ -110,3 +119,4 @@ int main()
         grabardatos = 0;
     }
 }
+

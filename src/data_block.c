@@ -32,18 +32,19 @@ void GrabarDatos(EXT_DATOS *memdatos, FILE *fich)
         fprintf(stderr, "Error: memdatos is NULL\n");
         return;
     }
-
     if (fich == NULL)
     {
         fprintf(stderr, "Error: fich is NULL\n");
         return;
     }
 
+
     if (fseek(fich, PRIM_BLOQUE_DATOS * SIZE_BLOQUE, SEEK_SET) != 0)
     {
         perror("Error seeking to the data block");
         return;
     }
+
 
     size_t written = fwrite(memdatos, SIZE_BLOQUE, MAX_BLOQUES_DATOS, fich);
     if (written != MAX_BLOQUES_DATOS)
@@ -52,5 +53,4 @@ void GrabarDatos(EXT_DATOS *memdatos, FILE *fich)
         return;
     }
 
-    fflush(fich);
 }
