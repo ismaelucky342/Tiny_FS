@@ -16,18 +16,18 @@
 #include "../includes/tiny_fs.h"
 
 /**
- * Lee el contenido del archivo "superblock.dat" y almacena los datos en la estructura proporcionada.
+ * Lee e imprime los datos del struct EXT_SIMPLE_SUPERBLOCK
  * 
- * @param psup Puntero a la estructura `EXT_SIMPLE_SUPERBLOCK` donde se almacenarán los datos leídos.
+ * @param psup Puntero a la estructura `EXT_SIMPLE_SUPERBLOCK` desde la que leer los datos.
  */
-void LeeSuperBloque(EXT_SIMPLE_SUPERBLOCK *psup) {
-    FILE *fich = fopen("superblock.dat", "rb");
-    if (fich == NULL) {
-        perror("Error opening file");
-        return;
-    }
-    fread(psup, sizeof(EXT_SIMPLE_SUPERBLOCK), 1, fich);
-    fclose(fich);
+void LeeSuperBloque(EXT_SIMPLE_SUPERBLOCK *psup)
+{
+    printf("Bloque %u bytes\n", psup->s_block_size);
+    printf("Inodos particion %u\n", psup->s_inodes_count);
+    printf("Inodos libres %u\n", psup->s_free_inodes_count);
+    printf("Bloques particion %u\n", psup->s_blocks_count);
+    printf("Bloques libres %u\n", psup->s_free_blocks_count);
+    printf("Primer bloque de datos %u\n", psup->s_first_data_block);
 }
 
 /**

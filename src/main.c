@@ -24,7 +24,7 @@ int main()
     char argumento1[LONGITUD_COMANDO];
     char argumento2[LONGITUD_COMANDO];
     
-    EXT_SIMPLE_SUPERBLOCK ext_superblock;
+    EXT_SIMPLE_SUPERBLOCK ext_superblock = {MAX_INODOS, MAX_BLOQUES_PARTICION, MAX_BLOQUES_DATOS, MAX_FICHEROS, PRIM_BLOQUE_DATOS, SIZE_BLOQUE, {0}};
     EXT_BYTE_MAPS ext_bytemaps;
     EXT_BLQ_INODOS ext_blq_inodos;
     EXT_ENTRADA_DIR directorio[MAX_FICHEROS];
@@ -56,7 +56,12 @@ int main()
             fgets(comando, LONGITUD_COMANDO, stdin);
         } while (ComprobarComando(comando, orden, argumento1, argumento2) != 0);
         
-        if (strcmp(orden, "dir") == 0) {
+        if (strcmp(orden, "info") == 0)
+        {
+            LeeSuperBloque(&ext_superblock);
+        }
+        else if (strcmp(orden, "dir") == 0)
+        {
             Directorio(directorio);
         }
         else if (strcmp(orden, "rename") == 0) {
