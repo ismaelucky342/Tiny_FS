@@ -44,9 +44,7 @@ void GrabarSuperBloque(EXT_SIMPLE_SUPERBLOCK *ext_superblock, FILE *fich)
         perror("Error opening file");
         return;
     }
-
     size_t bytes_written = fwrite(ext_superblock, sizeof(EXT_SIMPLE_SUPERBLOCK), 1, fich);
-
     if (bytes_written != 1)
     {
         perror("Error writing to file");
