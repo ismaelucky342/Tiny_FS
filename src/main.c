@@ -17,13 +17,26 @@
 
 #define LONGITUD_COMANDO 100
 
+/**
+ * @brief Función principal que gestiona la ejecución de comandos y las operaciones en el sistema de archivos.
+ * 
+ * Esta función se encarga de la interacción con el usuario a través de comandos, y realiza diversas operaciones 
+ * como lectura y escritura de datos en un sistema de archivos basado en particiones. Los comandos pueden ser:
+ * - `dir`: Mostrar el contenido del directorio.
+ * - `rename`: Cambiar el nombre de un archivo o directorio.
+ * - `remove`: Eliminar un archivo o directorio.
+ * - `copy`: Copiar un archivo o directorio.
+ * - `salir`: Guardar los cambios y salir del sistema.
+ * 
+ * @return int Retorna 0 si la ejecución es exitosa, o un valor distinto si ocurre algún error.
+ */
 int main()
 {
     char comando[LONGITUD_COMANDO];
     char orden[LONGITUD_COMANDO];
     char argumento1[LONGITUD_COMANDO];
     char argumento2[LONGITUD_COMANDO];
-    
+
     EXT_SIMPLE_SUPERBLOCK ext_superblock = {MAX_INODOS, MAX_BLOQUES_PARTICION, MAX_BLOQUES_DATOS, MAX_FICHEROS, PRIM_BLOQUE_DATOS, SIZE_BLOQUE, {0}};
     EXT_BYTE_MAPS ext_bytemaps;
     EXT_BLQ_INODOS ext_blq_inodos;
@@ -32,10 +45,11 @@ int main()
     EXT_DATOS datosfich[MAX_BLOQUES_PARTICION];
     int grabardatos = 0;
     FILE *fent;
-    
+
     // Lectura del fichero completo de una sola vez
     fent = fopen("particion.bin", "r+b");
-    if (fent == NULL) {
+    if (fent == NULL)
+    {
         perror("Error opening file");
         return 1;
     }
@@ -45,7 +59,7 @@ int main()
     memcpy(&ext_blq_inodos, &datosfich[2], SIZE_BLOQUE);
     memcpy(directorio, &datosfich[3], MAX_FICHEROS * sizeof(EXT_ENTRADA_DIR));
     memcpy(memdatos, &datosfich[4], MAX_BLOQUES_DATOS * SIZE_BLOQUE);
-    
+
     // Bucle de tratamiento de comandos
     for (;;)
     {
@@ -55,7 +69,7 @@ int main()
             fflush(stdin);
             fgets(comando, LONGITUD_COMANDO, stdin);
         } while (ComprobarComando(comando, orden, argumento1, argumento2) != 0);
-        
+
         if (strcmp(orden, "info") == 0)
         {
             LeeSuperBloque(&ext_superblock);
@@ -64,16 +78,20 @@ int main()
         {
             Directorio(directorio);
         }
-        else if (strcmp(orden, "rename") == 0) {
+        else if (strcmp(orden, "rename") == 0)
+        {
             Renombrar(directorio, &ext_blq_inodos, argumento1, argumento2);
         }
-        else if (strcmp(orden, "remove") == 0) {
+        else if (strcmp(orden, "remove") == 0)
+        {
             Borrar(directorio, &ext_blq_inodos, &ext_bytemaps, &ext_superblock, argumento1, fent);
         }
-        else if (strcmp(orden, "copy") == 0) {
+        else if (strcmp(orden, "copy") == 0)
+        {
             Copiar(directorio, &ext_blq_inodos, &ext_bytemaps, &ext_superblock, memdatos, argumento1, argumento2, fent);
         }
-        else if (strcmp(orden, "salir") == 0) {
+        else if (strcmp(orden, "salir") == 0)
+        {
             GrabarDatos(memdatos, fent);
             fclose(fent);
             printf(COLOR_GREEN "Saliendo del sistema..." COLOR_RESET "\n");
@@ -92,4 +110,3 @@ int main()
         grabardatos = 0;
     }
 }
-

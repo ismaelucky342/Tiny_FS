@@ -45,14 +45,14 @@ all: $(NAME)
 	@echo "$(COLOR_GREEN)               ██║    ██║██║ ╚████║   ██║███████╗██║     ███████║$(COLOR_RESET)"
 	@echo "$(COLOR_GREEN)               ╚═╝    ╚═╝╚═╝  ╚═══╝   ╚═╝╚══════╝╚═╝     ╚══════╝$(COLOR_RESET)"
 	@echo "                                                                                               "
-	@echo "$(COLOR_YELLOW)    Ismael Hernandez Clemente - ismael.hernandez@live.u-tad.com$(COLOR_RESET)"
-	@echo "$(COLOR_YELLOW)    Izhan Sastre Hernando     - izhan.sastre@live.u-tad.com$(COLOR_RESET)"
+	@echo "$(COLOR_YELLOW)    	Ismael Hernandez Clemente - ismael.hernandez@live.u-tad.com$(COLOR_RESET)"
+	@echo "$(COLOR_YELLOW)   	Izhan Sastre Hernando     - izhan.sastre@live.u-tad.com$(COLOR_RESET)"
 
 $(NAME): $(OBJS)
 	@$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
 
 %.o: %.c
-	@printf "%-200s\r" ">Philo_bonus compiling: $(CC) $(CFLAGS) -c -o $@ $<"
+	@printf "%-200s\r" ">TINY_FS compiling: $(CC) $(CFLAGS) -c -o $@ $<"
 	@$(CC) $(CFLAGS) -c -o $@ $<
 
 clean:

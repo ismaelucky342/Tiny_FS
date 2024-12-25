@@ -22,15 +22,18 @@
  * La función recorre los mapas de bytes de inodos y bloques, imprimiendo cada valor
  * en la consola. Primero imprime los inodos y luego los bloques.
  */
-void Printbytemaps(EXT_BYTE_MAPS *ext_bytemaps) {
+void Printbytemaps(EXT_BYTE_MAPS *ext_bytemaps)
+{
     int i;
 
     printf("Inodos:\n");
-    for (i = 0; i < MAX_INODOS; i++) {
+    for (i = 0; i < MAX_INODOS; i++)
+    {
         printf("%d", ext_bytemaps->bmap_inodos[i]);
     }
     printf("\nBloques:\n");
-    for (i = 0; i < MAX_BLOQUES_PARTICION; i++) {
+    for (i = 0; i < MAX_BLOQUES_PARTICION; i++)
+    {
         printf("%d", ext_bytemaps->bmap_bloques[i]);
     }
     printf("\n");
@@ -43,11 +46,11 @@ void Printbytemaps(EXT_BYTE_MAPS *ext_bytemaps) {
  * @param fich: Puntero al archivo donde se escribirán los mapas de bytes.
  *
  * La función posiciona el puntero del archivo en el segundo bloque (después del bloque de arranque)
- * y escribe la estructura EXT_BYTE_MAPS en el archivo. 
+ * y escribe la estructura EXT_BYTE_MAPS en el archivo.
  */
 
-
-void GrabarByteMaps(EXT_BYTE_MAPS *ext_bytemaps, FILE *fich) {
+void GrabarByteMaps(EXT_BYTE_MAPS *ext_bytemaps, FILE *fich)
+{
     fseek(fich, SIZE_BLOQUE, SEEK_SET);
     fwrite(ext_bytemaps, SIZE_BLOQUE, 1, fich);
 }
