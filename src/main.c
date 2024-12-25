@@ -99,6 +99,10 @@ int main()
         {
             Copiar(directorio, &ext_blq_inodos, &ext_bytemaps, &ext_superblock, memdatos, argumento1, argumento2, fent);
         }
+        else if (strcmp(orden, "bytemaps") == 0)
+        {
+            Printbytemaps(&ext_bytemaps);
+        }
         else if (strcmp(orden, "salir") == 0)
         {
             GrabarDatos(memdatos, fent);
