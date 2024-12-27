@@ -144,7 +144,5 @@ void GrabarInodosyDirectorio(EXT_ENTRADA_DIR *directorio, EXT_BLQ_INODOS *inodos
 
     // Flushing para asegurar que los datos sean escritos en el disco
     if (fflush(fich) != 0)
-    {
         perror(COLOR_RED "Error flushing file" COLOR_RESET);
-    }
 }

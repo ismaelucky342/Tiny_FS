@@ -149,9 +149,7 @@ int Copiar(EXT_ENTRADA_DIR *directorio, EXT_BLQ_INODOS *inodos, EXT_BYTE_MAPS *e
             }
         }
         else
-        {
             inodo_dst->i_nbloque[i] = NULL_BLOQUE;
-        }
     }
 
     GrabarInodosyDirectorio(directorio, inodos, fich);
@@ -184,13 +182,9 @@ int ComprobarComando(char *strcomando, char *orden, char *argumento1, char *argu
         strcpy(argumento1, token);
         token = strtok(NULL, " \n");
         if (token != NULL)
-        {
             strcpy(argumento2, token);
-        }
         else
-        {
             argumento2[0] = '\0';
-        }
     }
     else
     {

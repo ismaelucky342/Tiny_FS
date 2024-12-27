@@ -56,6 +56,7 @@ int main()
     fread(&datosfich, SIZE_BLOQUE, MAX_BLOQUES_PARTICION, fent);
     memcpy(&ext_superblock, &datosfich[0], SIZE_BLOQUE);
     memcpy(&ext_bytemaps, &datosfich[1], SIZE_BLOQUE);
+    printf("bytemap inicial: %i\n", datosfich[1]);
     memcpy(&ext_blq_inodos, &datosfich[2], SIZE_BLOQUE);
     memcpy(directorio, &datosfich[3], MAX_FICHEROS * sizeof(EXT_ENTRADA_DIR));
     memcpy(memdatos, &datosfich[4], MAX_BLOQUES_DATOS * SIZE_BLOQUE);

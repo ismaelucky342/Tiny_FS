@@ -68,9 +68,7 @@ int Imprimir(EXT_ENTRADA_DIR *directorio, EXT_BLQ_INODOS *inodos, EXT_DATOS *mem
     for (int i = 0; i < MAX_NUMS_BLOQUE_INODO; i++)
     {
         if (inodo->i_nbloque[i] != NULL_BLOQUE)
-        {
             printf("%s", memdatos[inodo->i_nbloque[i]].dato);
-        }
     }
     printf("\n");
     return 0;
