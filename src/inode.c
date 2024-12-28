@@ -31,7 +31,7 @@ int BuscaFich(EXT_ENTRADA_DIR *directorio, EXT_BLQ_INODOS *inodos, char *nombre)
 {
     if (directorio == NULL || inodos == NULL || nombre == NULL)
     {
-        fprintf(stderr, COLOR_RED "Error: Null pointer argument\n" COLOR_RESET);
+        perror(COLOR_RED "Error: Null pointer argument\n" COLOR_RESET);
         return -1;
     }
 
@@ -58,26 +58,26 @@ int Renombrar(EXT_ENTRADA_DIR *directorio, EXT_BLQ_INODOS *inodos, char *nombrea
 {
     if (directorio == NULL || inodos == NULL || nombreantiguo == NULL || nombrenuevo == NULL)
     {
-        fprintf(stderr, COLOR_RED "Error: Null pointer argument\n" COLOR_RESET);
+        perror(COLOR_RED "Error: Null pointer argument\n" COLOR_RESET);
         return -1;
     }
 
     if (nombrenuevo[0] == '\0')
     {
-        fprintf(stderr, COLOR_RED "Error: New file name is empty\n" COLOR_RESET);
+        perror(COLOR_RED "Error: New file name is empty\n" COLOR_RESET);
         return -1;
     }
 
-    if (strlen(nombrenuevo) >= MAX_NFICH)
+    if (ft_strlen(nombrenuevo) >= MAX_NFICH)
     {
-        fprintf(stderr, COLOR_RED "Error: New file name is too long\n" COLOR_RESET);
+        perror(COLOR_RED "Error: New file name is too long\n" COLOR_RESET);
         return -1;
     }
 
     int inodo_index = BuscaFich(directorio, inodos, nombreantiguo);
     if (inodo_index == -1)
     {
-        fprintf(stderr, COLOR_RED "Error: File not found\n" COLOR_RESET);
+        perror(COLOR_RED "Error: File not found\n" COLOR_RESET);
         return -1;
     }
 
@@ -85,7 +85,7 @@ int Renombrar(EXT_ENTRADA_DIR *directorio, EXT_BLQ_INODOS *inodos, char *nombrea
     {
         if (strcmp(directorio[i].dir_nfich, nombrenuevo) == 0)
         {
-            fprintf(stderr, COLOR_RED "Error: New file name already exists\n" COLOR_RESET);
+            perror(COLOR_RED "Error: New file name already exists\n" COLOR_RESET);
             return -1;
         }
     }
@@ -114,7 +114,7 @@ void GrabarInodosyDirectorio(EXT_ENTRADA_DIR *directorio, EXT_BLQ_INODOS *inodos
 {
     if (directorio == NULL || inodos == NULL || fich == NULL)
     {
-        fprintf(stderr, COLOR_RED "Error: Null pointer argument\n" COLOR_RESET);
+        perror(COLOR_RED "Error: Null pointer argument\n" COLOR_RESET);
         return;
     }
 

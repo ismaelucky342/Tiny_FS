@@ -18,9 +18,14 @@
 
 /*=======================================INCLUDES AREA==========================================*/
 
+#include "../Libft/libft.h"
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
+#include <unistd.h>
+#include <readline/readline.h>
+#include <readline/history.h>
 
 /*=======================================DEFINES AREA==========================================*/
 
@@ -119,7 +124,7 @@ void GrabarSuperBloque(EXT_SIMPLE_SUPERBLOCK *ext_superblock, FILE *fich);
 
 /*------------------------------------------directory.c--------------------------------------------*/
 
-void Directorio(EXT_ENTRADA_DIR *directorio);
+void Directorio(EXT_ENTRADA_DIR *directorio, EXT_BLQ_INODOS *inodos);
 int Imprimir(EXT_ENTRADA_DIR *directorio, EXT_BLQ_INODOS *inodos, EXT_DATOS *memdatos, char *nombre);
 
 /*--------------------------------------file_operations.c------------------------------------------*/

@@ -42,7 +42,7 @@ int Borrar(EXT_ENTRADA_DIR *directorio, EXT_BLQ_INODOS *inodos, EXT_BYTE_MAPS *e
 
     if (inodo_index == -1)
     {
-        printf(COLOR_RED "Error: File not found\n" COLOR_RESET);
+        ft_printf(COLOR_RED "Error: File not found\n" COLOR_RESET);
         return -1;
     }
 
@@ -96,7 +96,7 @@ int Copiar(EXT_ENTRADA_DIR *directorio, EXT_BLQ_INODOS *inodos, EXT_BYTE_MAPS *e
 
     if (inodo_origen == -1)
     {
-        printf(COLOR_RED "Error: Source file not found\n" COLOR_RESET);
+        ft_printf(COLOR_RED "Error: Source file not found\n" COLOR_RESET);
         return -1;
     }
 
@@ -114,7 +114,7 @@ int Copiar(EXT_ENTRADA_DIR *directorio, EXT_BLQ_INODOS *inodos, EXT_BYTE_MAPS *e
 
     if (inodo_destino == -1)
     {
-        printf(COLOR_RED "Error: No free inodes available\n" COLOR_RESET);
+        ft_printf(COLOR_RED "Error: No free inodes available\n" COLOR_RESET);
         return -1;
     }
 
@@ -143,7 +143,7 @@ int Copiar(EXT_ENTRADA_DIR *directorio, EXT_BLQ_INODOS *inodos, EXT_BYTE_MAPS *e
                     ext_bytemaps->bmap_bloques[j] = 1;
                     ext_superblock->s_free_blocks_count--;
                     inodo_dst->i_nbloque[i] = j;
-                    memcpy(memdatos[j].dato, memdatos[inodo_src->i_nbloque[i]].dato, SIZE_BLOQUE);
+                    ft_memcpy(memdatos[j].dato, memdatos[inodo_src->i_nbloque[i]].dato, SIZE_BLOQUE);
                     break;
                 }
             }

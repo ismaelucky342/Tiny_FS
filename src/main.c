@@ -32,7 +32,7 @@
  */
 int main()
 {
-    char comando[LONGITUD_COMANDO];
+    char *comando;
     char orden[LONGITUD_COMANDO];
     char argumento1[LONGITUD_COMANDO];
     char argumento2[LONGITUD_COMANDO];
@@ -54,67 +54,53 @@ int main()
         return 1;
     }
     fread(&datosfich, SIZE_BLOQUE, MAX_BLOQUES_PARTICION, fent);
-    memcpy(&ext_superblock, &datosfich[0], SIZE_BLOQUE);
-    memcpy(&ext_bytemaps, &datosfich[1], SIZE_BLOQUE);
-    printf("bytemap inicial: %i\n", datosfich[1]);
-    memcpy(&ext_blq_inodos, &datosfich[2], SIZE_BLOQUE);
-    memcpy(directorio, &datosfich[3], MAX_FICHEROS * sizeof(EXT_ENTRADA_DIR));
-    memcpy(memdatos, &datosfich[4], MAX_BLOQUES_DATOS * SIZE_BLOQUE);
+    ft_memcpy(&ext_superblock, &datosfich[0], SIZE_BLOQUE);
+    ft_memcpy(&ext_bytemaps, &datosfich[1], SIZE_BLOQUE);
+    ft_memcpy(&ext_blq_inodos, &datosfich[2], SIZE_BLOQUE);
+    ft_memcpy(directorio, &datosfich[3], MAX_FICHEROS * sizeof(EXT_ENTRADA_DIR));
+    ft_memcpy(memdatos, &datosfich[4], MAX_BLOQUES_DATOS * SIZE_BLOQUE);
 
     // Bucle de tratamiento de comandos
     while (1)
     {
-
-        printf(">> ");
-        fflush(stdin);
-        if (fgets(comando, LONGITUD_COMANDO, stdin) == NULL)
+        comando = readline(">> ");
+        if (comando == NULL)
         {
-            {
-                perror("Error reading command");
-                continue;
-            }
-        }
-        if (ComprobarComando(comando, orden, argumento1, argumento2) != 0)
-        {
-            printf(COLOR_RED "Error: Invalid command\n" COLOR_RESET);
+            perror("Error reading command");
             continue;
         }
-
+        if (ft_strlen(comando) > 0)
+            add_history(comando);
+        if (ComprobarComando(comando, orden, argumento1, argumento2) != 0)
+        {
+            ft_printf(COLOR_RED "Error: Invalid command\n" COLOR_RESET);
+            free(comando);
+            continue;
+        }
         if (strcmp(orden, "info") == 0)
-        {
             LeeSuperBloque(&ext_superblock);
-        }
+        else if (strcmp(orden, "imprimir") == 0)
+            Imprimir(directorio, &ext_blq_inodos, memdatos, argumento1);
         else if (strcmp(orden, "dir") == 0)
-        {
-            Directorio(directorio);
-        }
+            Directorio(directorio, &ext_blq_inodos);
         else if (strcmp(orden, "rename") == 0)
-        {
             Renombrar(directorio, &ext_blq_inodos, argumento1, argumento2);
-        }
         else if (strcmp(orden, "remove") == 0)
-        {
             Borrar(directorio, &ext_blq_inodos, &ext_bytemaps, &ext_superblock, argumento1, fent);
-        }
-        else if (strcmp(orden, "copy") == 0)
-        {
+        else if (strcmp(orden, "Copy") == 0)
             Copiar(directorio, &ext_blq_inodos, &ext_bytemaps, &ext_superblock, memdatos, argumento1, argumento2, fent);
-        }
         else if (strcmp(orden, "bytemaps") == 0)
-        {
             Printbytemaps(&ext_bytemaps);
-        }
         else if (strcmp(orden, "salir") == 0)
         {
             GrabarDatos(memdatos, fent);
             fclose(fent);
-            printf(COLOR_GREEN "Saliendo del sistema..." COLOR_RESET "\n");
+            ft_printf(COLOR_GREEN "Saliendo del sistema..." COLOR_RESET "\n");
+            free(comando);
             break;
         }
         else
-        {
-            printf(COLOR_RED "Comando desconocido: %s" COLOR_RESET "\n", orden);
-        }
+            ft_printf(COLOR_RED "Comando desconocido: %s" COLOR_RESET "\n", orden);
 
         GrabarInodosyDirectorio(directorio, &ext_blq_inodos, fent);
         GrabarByteMaps(&ext_bytemaps, fent);
@@ -122,6 +108,7 @@ int main()
         if (grabardatos)
             GrabarDatos(memdatos, fent);
         grabardatos = 0;
+        free(comando);
     }
 }
 

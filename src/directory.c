@@ -19,19 +19,27 @@
  * Directorio - Muestra los nombres de los archivos en un directorio.
  * @param directorio: Puntero a la estructura de directorio que contiene la información de los archivos.
  */
-void Directorio(EXT_ENTRADA_DIR *directorio)
+void Directorio(EXT_ENTRADA_DIR *directorio, EXT_BLQ_INODOS *inodos)
 {
-    if (directorio == NULL) {
-        fprintf(stderr, COLOR_RED "Error: Null pointer argument\n" COLOR_RESET);
+    if (directorio == NULL || inodos == NULL) {
+        perror(COLOR_RED "Error: Null pointer argument\n" COLOR_RESET);
         return;
     }
 
-    printf("Directorio:\n");
+    ft_printf("Directorio:\n");
     int i = 1;
     while (i < MAX_FICHEROS)
     {
-        if (directorio[i].dir_inodo != NULL_INODO)
-            printf("%i: %s\n", i, directorio[i].dir_nfich);
+        if (directorio[i].dir_inodo != NULL_INODO) {
+            EXT_SIMPLE_INODE *inodo = &inodos->blq_inodos[directorio[i].dir_inodo];
+            ft_printf("%i: %s, Tamaño: %d, Inodo: %d, Bloques: ", i, directorio[i].dir_nfich, inodo->size_fichero, directorio[i].dir_inodo);
+            for (int j = 0; j < MAX_NUMS_BLOQUE_INODO; j++) {
+                if (inodo->i_nbloque[j] != NULL_BLOQUE) {
+                    ft_printf("%d ", inodo->i_nbloque[j]);
+                }
+            }
+            ft_printf("\n");
+        }
         i++;
     }
 }
@@ -60,7 +68,7 @@ int Imprimir(EXT_ENTRADA_DIR *directorio, EXT_BLQ_INODOS *inodos, EXT_DATOS *mem
 
     if (inodo_index == -1)
     {
-        printf(COLOR_RED "Error: File not found\n" COLOR_RESET);
+        ft_printf(COLOR_RED "Error: File not found\n" COLOR_RESET);
         return -1;
     }
 
@@ -68,8 +76,8 @@ int Imprimir(EXT_ENTRADA_DIR *directorio, EXT_BLQ_INODOS *inodos, EXT_DATOS *mem
     for (int i = 0; i < MAX_NUMS_BLOQUE_INODO; i++)
     {
         if (inodo->i_nbloque[i] != NULL_BLOQUE)
-            printf("%s", memdatos[inodo->i_nbloque[i]].dato);
+            ft_printf("%s", memdatos[inodo->i_nbloque[i]].dato);
     }
-    printf("\n");
+    ft_printf("\n");
     return 0;
 }

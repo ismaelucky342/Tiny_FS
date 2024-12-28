@@ -26,13 +26,13 @@ void Printbytemaps(EXT_BYTE_MAPS *ext_bytemaps)
 {
     int i;
 
-    printf("Inodos: ");
+    ft_printf("Inodos: ");
     for (i = 0; i < MAX_INODOS; i++)
-        printf("%d ", ext_bytemaps->bmap_inodos[i]);
-    printf("\nBloques[0-25]: ");
+        ft_printf("%d ", ext_bytemaps->bmap_inodos[i]);
+    ft_printf("\nBloques[0-25]: ");
     for (i = 0; i < 25; i++)
-        printf("%d ", ext_bytemaps->bmap_bloques[i]);
-    printf("\n");
+        ft_printf("%d ", ext_bytemaps->bmap_bloques[i]);
+    ft_printf("\n");
 }
 
 /**
