@@ -9,8 +9,6 @@
 /*                                                                                     */
 /*       Ismael Hernandez Clemente              ismael.hernandez@live.u-tad.com        */
 /*                                                                                     */
-/*       Izhan Sastre Hernando                  izhan.sastre@live.u-tad.com            */
-/*                                                                                     */
 /***************************************************************************************/
 
 #include "../includes/tiny_fs.h"
@@ -143,7 +141,7 @@ int Copiar(EXT_ENTRADA_DIR *directorio, EXT_BLQ_INODOS *inodos, EXT_BYTE_MAPS *e
                     ext_bytemaps->bmap_bloques[j] = 1;
                     ext_superblock->s_free_blocks_count--;
                     inodo_dst->i_nbloque[i] = j;
-                    ft_memcpy(memdatos[j].dato, memdatos[inodo_src->i_nbloque[i]].dato, SIZE_BLOQUE);
+                    ft_memmove(memdatos[j].dato, memdatos[inodo_src->i_nbloque[i]].dato, SIZE_BLOQUE);
                     break;
                 }
             }

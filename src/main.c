@@ -9,8 +9,6 @@
 /*                                                                                     */
 /*       Ismael Hernandez Clemente              ismael.hernandez@live.u-tad.com        */
 /*                                                                                     */
-/*       Izhan Sastre Hernando                  izhan.sastre@live.u-tad.com            */
-/*                                                                                     */
 /***************************************************************************************/
 
 #include "../includes/tiny_fs.h"
@@ -22,10 +20,13 @@
  *
  * Esta función se encarga de la interacción con el usuario a través de comandos, y realiza diversas operaciones
  * como lectura y escritura de datos en un sistema de archivos basado en particiones. Los comandos pueden ser:
+ * - `info`: Mostrar información del superbloque.
+ * - `imprimir`: Imprimir el contenido de un archivo.
  * - `dir`: Mostrar el contenido del directorio.
  * - `rename`: Cambiar el nombre de un archivo o directorio.
  * - `remove`: Eliminar un archivo o directorio.
  * - `copy`: Copiar un archivo o directorio.
+ * - `bytemaps`: Mostrar los mapas de bytes.
  * - `salir`: Guardar los cambios y salir del sistema.
  *
  * @return int Retorna 0 si la ejecución es exitosa, o un valor distinto si ocurre algún error.
@@ -54,11 +55,13 @@ int main()
         return 1;
     }
     fread(&datosfich, SIZE_BLOQUE, MAX_BLOQUES_PARTICION, fent);
-    ft_memcpy(&ext_superblock, &datosfich[0], SIZE_BLOQUE);
-    ft_memcpy(&ext_bytemaps, &datosfich[1], SIZE_BLOQUE);
-    ft_memcpy(&ext_blq_inodos, &datosfich[2], SIZE_BLOQUE);
-    ft_memcpy(directorio, &datosfich[3], MAX_FICHEROS * sizeof(EXT_ENTRADA_DIR));
-    ft_memcpy(memdatos, &datosfich[4], MAX_BLOQUES_DATOS * SIZE_BLOQUE);
+
+    /*Función memcpy modificada por memmove para evitar solapamiento de memoria*/
+    ft_memmove(&ext_superblock, &datosfich[0], SIZE_BLOQUE);
+    ft_memmove(&ext_bytemaps, &datosfich[1], SIZE_BLOQUE);
+    ft_memmove(&ext_blq_inodos, &datosfich[2], SIZE_BLOQUE);
+    ft_memmove(directorio, &datosfich[3], MAX_FICHEROS * sizeof(EXT_ENTRADA_DIR));
+    ft_memmove(memdatos, &datosfich[4], MAX_BLOQUES_DATOS * SIZE_BLOQUE);
 
     // Bucle de tratamiento de comandos
     while (1)
@@ -105,6 +108,7 @@ int main()
         GrabarInodosyDirectorio(directorio, &ext_blq_inodos, fent);
         GrabarByteMaps(&ext_bytemaps, fent);
         GrabarSuperBloque(&ext_superblock, fent);
+        
         if (grabardatos)
             GrabarDatos(memdatos, fent);
         grabardatos = 0;

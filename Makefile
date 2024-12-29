@@ -9,8 +9,6 @@
 #                                                                                     #
 #       Ismael Hernandez Clemente              ismael.hernandez@live.u-tad.com        #
 #                                                                                     #
-#       Izhan Sastre Hernando                  izhan.sastre@live.u-tad.com            #
-#                                                                                     #
 #*************************************************************************************#
 # Colores para mensajes
 COLOR_RESET   = \033[0m
@@ -27,7 +25,7 @@ LDFLAGS = -lreadline -LLibft -lft
 
 SRC_FILES = src/main.c \
 						src/bytemaps.c \
-						src/data_block.c \
+						src/save_data.c \
 						src/directory.c \
 						src/file_operations.c \
 						src/inode.c \
@@ -49,7 +47,6 @@ all: $(NAME)
 	@echo "$(COLOR_GREEN)               ╚═╝    ╚═╝╚═╝  ╚═══╝   ╚═╝╚══════╝╚═╝     ╚══════╝$(COLOR_RESET)"
 	@echo "                                                                                               "
 	@echo "$(COLOR_YELLOW)    	Ismael Hernandez Clemente - ismael.hernandez@live.u-tad.com$(COLOR_RESET)"
-	@echo "$(COLOR_YELLOW)   	Izhan Sastre Hernando     - izhan.sastre@live.u-tad.com$(COLOR_RESET)"
 
 libft:
 	@$(MAKE) -C Libft

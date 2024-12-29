@@ -9,8 +9,6 @@
 /*                                                                                     */
 /*       Ismael Hernandez Clemente              ismael.hernandez@live.u-tad.com        */
 /*                                                                                     */
-/*       Izhan Sastre Hernando                  izhan.sastre@live.u-tad.com            */
-/*                                                                                     */
 /***************************************************************************************/
 
 #include "../includes/tiny_fs.h"
