@@ -27,23 +27,23 @@ void GrabarDatos(EXT_DATOS *memdatos, FILE *fich)
 {
     if (memdatos == NULL)
     {
-        perror("Error: memdatos is NULL\n");
+        ft_perror("Error: memdatos is NULL\n");
         return;
     }
     if (fich == NULL)
     {
-        perror("Error: fich is NULL\n");
+        ft_perror("Error: fich is NULL\n");
         return;
     }
     if (fseek(fich, PRIM_BLOQUE_DATOS * SIZE_BLOQUE, SEEK_SET) != 0)
     {
-        perror("Error seeking to the data block");
+        ft_perror("Error seeking to the data block");
         return;
     }
     size_t written = fwrite(memdatos, SIZE_BLOQUE, MAX_BLOQUES_DATOS, fich);
     if (written != MAX_BLOQUES_DATOS)
     {
-        perror("Error writing data to file");
+        ft_perror("Error writing data to file");
         return;
     }
 

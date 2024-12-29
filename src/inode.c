@@ -29,13 +29,13 @@ int BuscaFich(EXT_ENTRADA_DIR *directorio, EXT_BLQ_INODOS *inodos, char *nombre)
 {
     if (directorio == NULL || inodos == NULL || nombre == NULL)
     {
-        perror(COLOR_RED "Error: Null pointer argument\n" COLOR_RESET);
+        ft_perror ("Error: Null pointer argument\n" );
         return -1;
     }
 
     for (int i = 0; i < MAX_FICHEROS; i++)
     {
-        if (strcmp(directorio[i].dir_nfich, nombre) == 0)
+        if (ft_strcmp(directorio[i].dir_nfich, nombre) == 0)
         {
             return directorio[i].dir_inodo;
         }
@@ -56,34 +56,34 @@ int Renombrar(EXT_ENTRADA_DIR *directorio, EXT_BLQ_INODOS *inodos, char *nombrea
 {
     if (directorio == NULL || inodos == NULL || nombreantiguo == NULL || nombrenuevo == NULL)
     {
-        perror(COLOR_RED "Error: Null pointer argument\n" COLOR_RESET);
+        ft_perror ("Error: Null pointer argument\n" );
         return -1;
     }
 
     if (nombrenuevo[0] == '\0')
     {
-        perror(COLOR_RED "Error: New file name is empty\n" COLOR_RESET);
+        ft_perror ("Error: New file name is empty\n" );
         return -1;
     }
 
     if (ft_strlen(nombrenuevo) >= MAX_NFICH)
     {
-        perror(COLOR_RED "Error: New file name is too long\n" COLOR_RESET);
+        ft_perror ("Error: New file name is too long\n" );
         return -1;
     }
 
     int inodo_index = BuscaFich(directorio, inodos, nombreantiguo);
     if (inodo_index == -1)
     {
-        perror(COLOR_RED "Error: File not found\n" COLOR_RESET);
+        ft_perror ("Error: File not found\n" );
         return -1;
     }
 
     for (int i = 0; i < MAX_FICHEROS; i++)
     {
-        if (strcmp(directorio[i].dir_nfich, nombrenuevo) == 0)
+        if (ft_strcmp(directorio[i].dir_nfich, nombrenuevo) == 0)
         {
-            perror(COLOR_RED "Error: New file name already exists\n" COLOR_RESET);
+            ft_perror ("Error: New file name already exists\n" );
             return -1;
         }
     }
@@ -92,7 +92,7 @@ int Renombrar(EXT_ENTRADA_DIR *directorio, EXT_BLQ_INODOS *inodos, char *nombrea
     {
         if (directorio[i].dir_inodo == inodo_index)
         {
-            strcpy(directorio[i].dir_nfich, nombrenuevo);
+            ft_strcpy(directorio[i].dir_nfich, nombrenuevo);
             break;
         }
     }
@@ -112,35 +112,35 @@ void GrabarInodosyDirectorio(EXT_ENTRADA_DIR *directorio, EXT_BLQ_INODOS *inodos
 {
     if (directorio == NULL || inodos == NULL || fich == NULL)
     {
-        perror(COLOR_RED "Error: Null pointer argument\n" COLOR_RESET);
+        ft_perror ("Error: Null pointer argument\n" );
         return;
     }
 
     // Escribir el bloque del directorio
     if (fseek(fich, 3 * SIZE_BLOQUE, SEEK_SET) != 0)
     {
-        perror(COLOR_RED "Error seeking to directory block" COLOR_RESET);
+        ft_perror ("Error seeking to directory block" );
         return;
     }
     if (fwrite(directorio, SIZE_BLOQUE, 1, fich) != 1)
     {
-        perror(COLOR_RED "Error writing directory block" COLOR_RESET);
+        ft_perror ("Error writing directory block" );
         return;
     }
 
     // Escribir el bloque de inodos
     if (fseek(fich, 2 * SIZE_BLOQUE, SEEK_SET) != 0)
     {
-        perror(COLOR_RED "Error seeking to inodes block" COLOR_RESET);
+        ft_perror ("Error seeking to inodes block" );
         return;
     }
     if (fwrite(inodos, SIZE_BLOQUE, 1, fich) != 1)
     {
-        perror(COLOR_RED "Error writing inodes block" COLOR_RESET);
+        ft_perror ("Error writing inodes block" );
         return;
     }
 
     // Flushing para asegurar que los datos sean escritos en el disco
     if (fflush(fich) != 0)
-        perror(COLOR_RED "Error flushing file" COLOR_RESET);
+        ft_perror ("Error flushing file" );
 }

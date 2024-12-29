@@ -20,7 +20,7 @@
 void Directorio(EXT_ENTRADA_DIR *directorio, EXT_BLQ_INODOS *inodos)
 {
     if (directorio == NULL || inodos == NULL) {
-        perror(COLOR_RED "Error: Null pointer argument\n" COLOR_RESET);
+        ft_perror ("Error: Null pointer argument\n" );
         return;
     }
 
@@ -56,7 +56,7 @@ int Imprimir(EXT_ENTRADA_DIR *directorio, EXT_BLQ_INODOS *inodos, EXT_DATOS *mem
     int inodo_index = -1;
     for (int i = 0; i < MAX_FICHEROS; i++)
     {
-        if (strcmp(directorio[i].dir_nfich, nombre) == 0)
+        if (ft_strcmp(directorio[i].dir_nfich, nombre) == 0)
         {
             inodo_index = directorio[i].dir_inodo;
             break;
@@ -65,7 +65,7 @@ int Imprimir(EXT_ENTRADA_DIR *directorio, EXT_BLQ_INODOS *inodos, EXT_DATOS *mem
 
     if (inodo_index == -1)
     {
-        ft_printf(COLOR_RED "Error: File not found\n" COLOR_RESET);
+        ft_printf(COLOR_RED "Error: File not found\n" );
         return -1;
     }
 

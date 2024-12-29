@@ -51,7 +51,7 @@ int main()
     fent = fopen("particion.bin", "r+b");
     if (fent == NULL)
     {
-        perror("Error opening file");
+        ft_perror("Error opening file");
         return 1;
     }
     fread(&datosfich, SIZE_BLOQUE, MAX_BLOQUES_PARTICION, fent);
@@ -76,25 +76,25 @@ int main()
             add_history(comando);
         if (ComprobarComando(comando, orden, argumento1, argumento2) != 0)
         {
-            ft_printf(COLOR_RED "Error: Invalid command\n" COLOR_RESET);
+            ft_printf(COLOR_RED "Error: Invalid command\n" );
             free(comando);
             continue;
         }
-        if (strcmp(orden, "info") == 0)
+        if (ft_strcmp(orden, "info") == 0)
             LeeSuperBloque(&ext_superblock);
-        else if (strcmp(orden, "imprimir") == 0)
+        else if (ft_strcmp(orden, "imprimir") == 0)
             Imprimir(directorio, &ext_blq_inodos, memdatos, argumento1);
-        else if (strcmp(orden, "dir") == 0)
+        else if (ft_strcmp(orden, "dir") == 0)
             Directorio(directorio, &ext_blq_inodos);
-        else if (strcmp(orden, "rename") == 0)
+        else if (ft_strcmp(orden, "rename") == 0)
             Renombrar(directorio, &ext_blq_inodos, argumento1, argumento2);
-        else if (strcmp(orden, "remove") == 0)
+        else if (ft_strcmp(orden, "remove") == 0)
             Borrar(directorio, &ext_blq_inodos, &ext_bytemaps, &ext_superblock, argumento1, fent);
-        else if (strcmp(orden, "Copy") == 0)
+        else if (ft_strcmp(orden, "Copy") == 0)
             Copiar(directorio, &ext_blq_inodos, &ext_bytemaps, &ext_superblock, memdatos, argumento1, argumento2, fent);
-        else if (strcmp(orden, "bytemaps") == 0)
+        else if (ft_strcmp(orden, "bytemaps") == 0)
             Printbytemaps(&ext_bytemaps);
-        else if (strcmp(orden, "salir") == 0)
+        else if (ft_strcmp(orden, "salir") == 0)
         {
             GrabarDatos(memdatos, fent);
             fclose(fent);

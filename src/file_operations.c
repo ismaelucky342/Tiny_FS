@@ -30,7 +30,7 @@ int Borrar(EXT_ENTRADA_DIR *directorio, EXT_BLQ_INODOS *inodos, EXT_BYTE_MAPS *e
     int inodo_index = -1;
     for (int i = 0; i < MAX_FICHEROS; i++)
     {
-        if (strcmp(directorio[i].dir_nfich, nombre) == 0)
+        if (ft_strcmp(directorio[i].dir_nfich, nombre) == 0)
         {
             inodo_index = directorio[i].dir_inodo;
             directorio[i].dir_inodo = NULL_INODO;
@@ -40,7 +40,7 @@ int Borrar(EXT_ENTRADA_DIR *directorio, EXT_BLQ_INODOS *inodos, EXT_BYTE_MAPS *e
 
     if (inodo_index == -1)
     {
-        ft_printf(COLOR_RED "Error: File not found\n" COLOR_RESET);
+        ft_printf(COLOR_RED "Error: File not found\n" );
         return -1;
     }
 
@@ -85,7 +85,7 @@ int Copiar(EXT_ENTRADA_DIR *directorio, EXT_BLQ_INODOS *inodos, EXT_BYTE_MAPS *e
     int inodo_origen = -1;
     for (int i = 0; i < MAX_FICHEROS; i++)
     {
-        if (strcmp(directorio[i].dir_nfich, nombreorigen) == 0)
+        if (ft_strcmp(directorio[i].dir_nfich, nombreorigen) == 0)
         {
             inodo_origen = directorio[i].dir_inodo;
             break;
@@ -94,7 +94,7 @@ int Copiar(EXT_ENTRADA_DIR *directorio, EXT_BLQ_INODOS *inodos, EXT_BYTE_MAPS *e
 
     if (inodo_origen == -1)
     {
-        ft_printf(COLOR_RED "Error: Source file not found\n" COLOR_RESET);
+        ft_printf(COLOR_RED "Error: Source file not found\n" );
         return -1;
     }
 
@@ -112,7 +112,7 @@ int Copiar(EXT_ENTRADA_DIR *directorio, EXT_BLQ_INODOS *inodos, EXT_BYTE_MAPS *e
 
     if (inodo_destino == -1)
     {
-        ft_printf(COLOR_RED "Error: No free inodes available\n" COLOR_RESET);
+        ft_printf(COLOR_RED "Error: No free inodes available\n" );
         return -1;
     }
 
@@ -120,7 +120,7 @@ int Copiar(EXT_ENTRADA_DIR *directorio, EXT_BLQ_INODOS *inodos, EXT_BYTE_MAPS *e
     {
         if (directorio[i].dir_inodo == NULL_INODO)
         {
-            strcpy(directorio[i].dir_nfich, nombredestino);
+            ft_strcpy(directorio[i].dir_nfich, nombredestino);
             directorio[i].dir_inodo = inodo_destino;
             break;
         }
@@ -173,14 +173,14 @@ int ComprobarComando(char *strcomando, char *orden, char *argumento1, char *argu
     if (token == NULL)
         return -1;
 
-    strcpy(orden, token);
+    ft_strcpy(orden, token);
     token = strtok(NULL, " \n");
     if (token != NULL)
     {
-        strcpy(argumento1, token);
+        ft_strcpy(argumento1, token);
         token = strtok(NULL, " \n");
         if (token != NULL)
-            strcpy(argumento2, token);
+            ft_strcpy(argumento2, token);
         else
             argumento2[0] = '\0';
     }

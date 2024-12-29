@@ -31,10 +31,11 @@ En este proyecto, he incorporado mi librería de funciones personalizadas, libft
 Enlace al proyecto original:  [**42_Libft**](https://github.com/ismaelucky342/Libft)
 
 funciones utilizadas:
-- ft_memmove: función para copiar memoria utilizada como sustituto a memcpy para evitar solapamiento. 
+- ft_memmove: función de copiado memoria utilizada como sustituto a memcpy para evitar solapamiento. 
+- ft_strtok:  version segura de strtok que evita problemas de alteración de cadena original 
 - ft_printf:  función que emula el comportamiento de printf de manera mas óptima. 
-- ft_perror:  función que emula perror con colores personalizados
-
+- ft_perror:  versión propia de perror a partir de write con colores personalizados. 
+- ft_strcpy y ft_strcmp:  versiones personalizadas de strcpy y strcmp con protecciones adicionales. 
 ## Clonado y compilación
 
 1. Clonar el repositorio:

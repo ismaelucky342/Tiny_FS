@@ -105,6 +105,7 @@ typedef struct s_hashtable
 } t_hashtable;
 
 // new functions
+char *ft_strtok(char *str, char sepa);
 void ft_perror(const char *message);
 void ft_bin2ascii(char *s);
 char *ft_string2bin(char *s, size_t i, size_t j);
