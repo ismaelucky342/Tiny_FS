@@ -42,7 +42,6 @@ void Directorio(EXT_ENTRADA_DIR *directorio, EXT_BLQ_INODOS *inodos)
     }
 }
 
-
 /**
  * Imprimir - Imprime los datos de un archivo basado en su nombre.
  * @param directorio: Puntero a la estructura de directorio que contiene la información de los archivos.
