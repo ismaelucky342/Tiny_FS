@@ -105,6 +105,7 @@ LIB_SRC =	checkD_bf.c \
 		ft_skip_spaces.c \
 		ft_strcpy.c \
 		ft_strjoin_free.c \
+		ft_perror.c \
 		ft_is_reserved_char.c \
 		ft_strndup.c
 
