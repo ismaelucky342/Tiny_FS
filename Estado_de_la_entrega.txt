@@ -1,0 +1,67 @@
+Evaluación
+
+1. Arranque del programa, lectura del fichero particion.bin e inicialización de variables con control de errores (1 punto)
+Estado: Realizado.
+Detalles:
+El programa arranca correctamente, realiza la lectura del fichero particion.bin y verifica su existencia. Se implementó control de errores para garantizar que el fichero sea válido y que las estructuras necesarias (superbloque, bytemap, inodos, etc.) se inicialicen correctamente.
+Dificultad: Durante el desarrollo se identificó un problema relacionado con la escritura y liberación de memoria en el superbloque, lo que generaba errores en operaciones subsecuentes.
+Resolución: El problema fue resuelto ajustando el manejo de punteros y corrigiendo un fclose adicional (Commit: "problema de memoria solucionado en grabar superbloque línea 53, fclose de más").
+
+2. Comando salir y mensaje de error si no existe el comando (0.5 puntos)
+Estado: Realizado.
+Detalles:
+El comando salir finaliza el programa correctamente. Si se introduce un comando desconocido, se imprime un mensaje de error.
+Dificultad: Ninguna significativa.
+
+3. Comando info (0.5 puntos)
+Estado: Realizado.
+Detalles:
+El comando info muestra correctamente la información del sistema de archivos, incluyendo el número total de bloques, bloques libres, y tamaño del sistema.
+Dificultad: Ninguna significativa (Commit: "comando info").
+
+4. Comando bytemaps (0.5 puntos)
+Estado: Realizado.
+Detalles:
+El comando bytemaps muestra el mapa de bits para los bloques de datos.
+Dificultad: Durante las pruebas iniciales, el mapa de bits no reflejaba correctamente el estado del sistema debido a un problema con la sincronización del superbloque.
+Resolución: Ajuste en la lógica para actualizar el superbloque antes de generar el bytemap (Commit: "bytemap, problema con superbloque").
+
+5. Comando dir (0.5 puntos)
+Estado: Realizado.
+Detalles:
+El comando dir lista correctamente los archivos y directorios presentes en el sistema.
+Dificultad: Se detectaron entradas con inodos de tamaño 0 debido a un problema en la inicialización de las estructuras.
+Resolución: Uso de memcpy y ajustes en la gestión de tamaños (Commit: "memcpy -> memmove y gestión de tamaño en dir").
+
+6. Comando rename (0.5 puntos)
+Estado: Realizado.
+Detalles:
+El comando permite cambiar el nombre de los archivos en el sistema.
+Dificultad: Ninguna significativa.
+
+7. Comando remove (1-1.5 puntos)
+Estado: Realizado.
+Detalles:
+El comando elimina correctamente archivos de uno o varios bloques.
+Dificultad: Ninguna significativa.
+
+8. Comando imprimir (1-1.5 puntos)
+Estado: Realizado.
+Detalles:
+El comando imprime el contenido de archivos de uno o varios bloques.
+Dificultad: Ninguna significativa.
+
+9. Comando copiar (1-2.5 puntos)
+Estado: Realizado.
+Detalles:
+El comando copia archivos, soportando tanto archivos de un solo bloque como de múltiples bloques.
+Dificultad: Ninguna significativa.
+
+10. Documentación de commits, estructura del código y video (1 punto)
+Estado: Realizado.
+Detalles:
+
+Los commits están correctamente documentados, describiendo los cambios realizados y las soluciones implementadas.
+El código está estructurado y comentado para facilitar su comprensión y mantenimiento.
+Se incluye un video explicativo que documenta el funcionamiento del programa.
+Dificultad: Ninguna significativa 
