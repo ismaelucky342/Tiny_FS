@@ -1,4 +1,7 @@
 # Tiny_FS
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/ed8fff77-bb4f-4790-ad84-a4022b6253e0" width="350">
+</p>
 
 ## Description
 Tiny_FS is a partition-based file system simulator that enables file management using essential data structures such as inodes, directories, and data blocks. This project is designed to emulate basic operations of a traditional file system, allowing users to create, read, write, modify, and delete files in a controlled environment.
