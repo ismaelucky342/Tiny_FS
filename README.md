@@ -1,89 +1,100 @@
 # Tiny_FS
 
-## Descripción
-Tiny_FS es un simulador del sistema de archivos basado en particiones que permite la gestión de archivos mediante estructuras de datos esenciales como inodos, directorios y bloques de datos. Este proyecto está diseñado para emular operaciones básicas de un sistema de archivos tradicional, permitiendo crear, leer, escribir, modificar y eliminar archivos en un entorno controlado.
+## Description
+Tiny_FS is a partition-based file system simulator that enables file management using essential data structures such as inodes, directories, and data blocks. This project is designed to emulate basic operations of a traditional file system, allowing users to create, read, write, modify, and delete files in a controlled environment.
 
-## Objetivo Principal
-El objetivo principal de Tiny_FS es proporcionar una estructura mínima pero funcional para la gestión de archivos y directorios, utilizando conceptos fundamentales como:
+## Main Objective
+The main goal of Tiny_FS is to provide a minimal yet functional structure for managing files and directories, using fundamental concepts such as:
 
-#### Inodos
-Cada archivo o directorio está asociado a un inodo que almacena metadatos importantes como permisos, punteros a bloques de datos, tamaño, y tipo de contenido.
-#### Directorios
-Los directorios permiten organizar y almacenar múltiples archivos, proporcionando una jerarquía simple y eficiente para la navegación del sistema de archivos.
-#### Bloques de Datos
-Los bloques de datos son las unidades básicas para almacenar información en el sistema, gestionando contenido como texto, imágenes, etc.
+### Inodes
+Each file or directory is associated with an inode that stores important metadata, such as permissions, data block pointers, size, and content type.
 
-## Dependencias
-#### Librería Libft
-#### Bibliotecas estándar:
-    - stdio.h
-    - stdlib.h
-    - string.h
-    - ctype.h
-    - unistd.h
-#### Bibliotecas adicionales:
-    - readline/readline.h
-    - readline/history.h
-# Uso de librería Auxiliar (42 Libft)
+### Directories
+Directories organize and store multiple files, providing a simple and efficient hierarchy for navigating the file system.
 
-En este proyecto, he incorporado mi librería de funciones personalizadas, libft, desarrollada en el marco de la escuela 42 Madrid. La finalidad de utilizar esta librería es mejorar y robustecer las funciones estándar al proporcionar versiones personalizadas adaptadas específicamente a las necesidades de este proyecto.
+### Data Blocks
+Data blocks are the basic units for storing information in the system, managing content such as text, images, etc.
 
-Enlace al proyecto original:  [**42_Libft**](https://github.com/ismaelucky342/Libft)
+## Dependencies
 
-funciones utilizadas:
-- ft_memmove: función de copiado memoria utilizada como sustituto a memcpy para evitar solapamiento. 
-- ft_strtok:  version segura de strtok que evita problemas de alteración de cadena original 
-- ft_printf:  función que emula el comportamiento de printf de manera mas óptima. 
-- ft_perror:  versión propia de perror a partir de write con colores personalizados. 
-- ft_strcpy y ft_strcmp:  versiones personalizadas de strcpy y strcmp con protecciones adicionales. 
-## Clonado y compilación
+### Libft Library
 
-1. Clonar el repositorio:
+### Standard Libraries:
+
+- stdio.h
+- stdlib.h
+- string.h
+- ctype.h
+- unistd.h
+
+### Additional Libraries:
+
+- readline/readline.h
+- readline/history.h
+
+# Use of Auxiliary Library (42 Libft)
+In this project, I have incorporated my custom function library, libft, developed as part of the 42 Madrid school curriculum. The purpose of using this library is to enhance and strengthen standard functions by providing customized versions tailored specifically to the needs of this project.
+
+Original project link: [**42_Libft**](https://github.com/ismaelucky342/Libft)
+
+Functions used:
+
+- `ft_memmove`: Memory copy function used as a replacement for `memcpy` to prevent overlapping issues.
+- `ft_strtok`: A safe version of `strtok` that avoids modifying the original string.
+- `ft_printf`: A more optimized implementation of `printf`.
+- `ft_perror`: A custom version of `perror` using `write`, with personalized colors.
+- `ft_strcpy` and `ft_strcmp`: Customized versions of `strcpy` and `strcmp` with additional protections.
+
+## Cloning and Compilation
+
+1. Clone the repository:
+    
     ```bash
-    git clone https://github.com/usuario/proyecto.git
+    git clone https://github.com/user/project.git
     ```
-2. Usos del makefile:
+    
+2. Makefile usage:
+    
     ```bash
-    make all # para compilación de Librería auxiliar y programa principal
-
-    make # para compilación de unicamente la Librería auxiliar
-
-    make re # para recompilar todo 
-
-    make fclean # para limpieza de objetos y ejecutable
+    make all    # Compile both the auxiliary library and the main program
+    
+    make        # Compile only the auxiliary library
+    
+    make re     # Recompile everything
+    
+    make fclean # Clean up object files and the executable
     ```
-3. Ejecución del programa:
+    
+3. Running the program:
+    
     ```bash
     ./tiny_fs
     ```
+    
 
-## Uso
-Ejecuta `./tiny_fs` para interactuar con el sistema de archivos. Comandos disponibles:
+## Usage
 
-- info: Mostrar información del superbloque.
+Run `./tiny_fs` to interact with the file system. Available commands:
 
-- imprimir [nombre]: Imprimir el contenido de un archivo.
+- `info`: Show information about the superblock.
+- `print [name]`: Print the content of a file.
+- `rename [old name] [new name]`: Rename a file or directory.
+- `remove [name]`: Delete a file or directory.
+- `copy [name] [new name]`: Copy a file or directory.
+- `bytemaps`: Show information about the byte maps.
+- `exit`: Exit the file system.
 
-- info: Mostrar información del superbloque.
+Additionally, the program features a functional command history, allowing users to navigate through previously used commands using the up and down arrow keys.
 
-- rename [nombre antiguo] [nuevo nombre]: Cambiar el nombre de un archivo o directorio.
+## Project Structure
 
-- remove [nombre]: Borrar un archivo o directorio.
-
-- Copy [nombre] [nuevo nombre]: Copiar un archivo o directorio.
-
-- bytemaps: Mostrar información sobre los mapas de bytes.
-
-- salir: Salir del sistema de archivos.
-
-Adicionalmente el programa cuenta con un historial funcional con las flechas arriba y abajo del teclado que permiten al usuario usar comandos utilizados anteriormente. 
-
-## Estructura del Proyecto
 ```
+less
+CopyEdit
 ├── Libft
 ├── Makefile
 ├── README.md
-├── includes 
+├── includes
 |    └── tiny_fs.h
 └── src
      ├── bytemaps.c
@@ -91,15 +102,15 @@ Adicionalmente el programa cuenta con un historial funcional con las flechas arr
      ├── file_operations.c
      ├── inode.c
      ├── save_data.c
-     ├── superblock.c 
+     ├── superblock.c
      └── main.c
+
 ```
 
-## Licencia
-Este proyecto está licenciado bajo la licencia MIT. Ver el archivo [LICENSE](LICENSE) para más detalles.
+## License
+This project is licensed under the MIT License. See the [LICENSE](https://www.notion.so/LICENSE) file for more details.
 
-## Extras 
-Este proyecto ha proporcionado una experiencia enriquecedora para profundizar en el manejo avanzado de ficheros dentro del ámbito de sistemas operativos. Además, servirá como base sólida para futuros desarrollos y proyectos relacionados con la gestión de sistemas y archivos.
-
+## Extras
+This project has provided an enriching experience in deepening file management knowledge within the field of operating systems. Moreover, it serves as a solid foundation for future developments and projects related to system and file management.
 
 ![image](https://github.com/ismaelucky342/U-Tad/assets/153450550/62bc16fd-1d63-401e-962d-b090cad59bdc)
