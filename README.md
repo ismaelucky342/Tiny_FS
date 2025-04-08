@@ -111,7 +111,7 @@ CopyEdit
 ```
 
 ## License
-This project is licensed under the MIT License. See the [LICENSE](https://www.notion.so/LICENSE) file for more details.
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more details.
 
 ## Extras
 This project has provided an enriching experience in deepening file management knowledge within the field of operating systems. Moreover, it serves as a solid foundation for future developments and projects related to system and file management.
